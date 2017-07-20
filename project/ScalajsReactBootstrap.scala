@@ -8,8 +8,8 @@ import ScalaJSPlugin.autoImport._
 object Settings {
 
   object versions {
-    val scala = "2.11.5"
-    val scalajsReact = "0.8.1"
+    val scala = "2.12.2"
+    val scalajsReact = "0.9.3"
   }
 
 }
@@ -20,7 +20,7 @@ object ScalajsReactBootstrap extends Build {
     _.enablePlugins(ScalaJSPlugin)
       .settings(
         organization := "com.acework",
-        version := "0.0.1-SNAPSHOT",
+        version := "0.0.2",
         scalaVersion := Settings.versions.scala,
         scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature",
           "-language:postfixOps", "-language:implicitConversions", "-language:reflectiveCalls",
@@ -47,7 +47,7 @@ object ScalajsReactBootstrap extends Build {
       .settings(
         libraryDependencies ++= Seq(
           "com.lihaoyi" %%% "utest" % "0.3.0"
-          , "com.github.japgolly.scalajs-react" %%% "test" % "0.8.2" % "test"
+          , "com.github.japgolly.scalajs-react" %%% "test" % "1.1.0" % "test"
         )
         , testFrameworks += new TestFramework("utest.runner.Framework")
         , scalaJSStage in Test := FastOptStage
@@ -58,9 +58,9 @@ object ScalajsReactBootstrap extends Build {
   def useReactJs(scope: String = "compile"): Project => Project =
     _.settings(
       jsDependencies ++= Seq(
-        "org.webjars" % "react" % "0.12.1" % scope / "react-with-addons.js" commonJSName "React"
+        "org.webjars" % "react" % "15.6.1" % scope / "react-with-addons.js" commonJSName "React"
         , "org.webjars" % "jquery" % "1.11.1" / "jquery.min.js"
-        , "org.webjars" % "bootstrap" % "3.3.2" / "bootstrap.min.js" dependsOn "jquery.min.js"
+        , "org.webjars" % "bootstrap" % "3.3.7" / "bootstrap.min.js" dependsOn "jquery.min.js"
         , "org.webjars" % "log4javascript" % "1.4.10" / "js/log4javascript_uncompressed.js"
       )
       , skip in packageJSDependencies := false
@@ -83,7 +83,7 @@ object ScalajsReactBootstrap extends Build {
       name := "core",
       emitSourceMaps := true,
       libraryDependencies ++= Seq(
-        "org.scala-js" %%% "scalajs-dom" % "0.8.0"
+        "org.scala-js" %%% "scalajs-dom" % "0.9.3"
         , "com.github.japgolly.scalajs-react" %%% "core" % Settings.versions.scalajsReact
         , "com.github.japgolly.scalajs-react" %%% "extra" % Settings.versions.scalajsReact
       ))
